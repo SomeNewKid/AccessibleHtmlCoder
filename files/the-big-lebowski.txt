@@ -1,0 +1,5 @@
+Create a complete HTML 5 document which presents a short (fewer than 100 words) light-hearted review of the movie "The Big Lebowski".
+
+The HTML document should display a hero image, which has the root-relative location of "/the-big-lebowski.jpg".
+
+The HTML dcoument should include links to this movie on IMDB (https://www.imdb.com/title/tt0118715/) and on Rotten Tomatoes (https://www.rottentomatoes.com/m/the_big_lebowski).

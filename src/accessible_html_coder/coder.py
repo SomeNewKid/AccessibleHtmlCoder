@@ -11,6 +11,7 @@ from accessible_html_coder.models import AccessibilityFinding, CoderResult
 
 MODEL_NAME = "gpt-4o"
 
+
 def create_html_document(
     requirements: str,
     previous_html: str | None = None,
@@ -24,7 +25,7 @@ def create_html_document(
 def _create_initial_html(requirements: str) -> CoderResult:
     messages = [
         SystemMessage(content=_get_system_prompt()),
-        HumanMessage(content=_get_initial_prompt(requirements))
+        HumanMessage(content=_get_initial_prompt(requirements)),
     ]
 
     return _invoke_coder(messages)
@@ -39,19 +40,16 @@ def _revise_html(
             content=_get_revision_prompt(
                 requirements=requirements,
                 previous_html=previous_html,
-                findings=findings
+                findings=findings,
             )
-        )
+        ),
     ]
 
     return _invoke_coder(messages)
 
 
 def _invoke_coder(messages: list[SystemMessage | HumanMessage]) -> CoderResult:
-    model = ChatOpenAI(
-        model=MODEL_NAME, 
-        temperature=0.2
-    )
+    model = ChatOpenAI(model=MODEL_NAME, temperature=0.2)
 
     structured_model = model.with_structured_output(CoderResult)
     result = structured_model.invoke(messages)
@@ -84,6 +82,7 @@ Create a brand new static HTML document from these requirements:
 
 The document should be simple and readable.
 """.strip()
+
 
 def _get_revision_prompt(
     requirements: str,

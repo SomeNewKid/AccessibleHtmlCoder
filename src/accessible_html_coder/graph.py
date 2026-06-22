@@ -53,9 +53,9 @@ def _run_coder(state: HtmlCoderState) -> dict[str, object]:
     coder_result = create_html_document(state["goal"], state["html"], state["findings"])
 
     return {
-        "html": coder_result.html, 
-        "iteration": state["iteration"] + 1, 
-        "stop_reason": None
+        "html": coder_result.html,
+        "iteration": state["iteration"] + 1,
+        "stop_reason": None,
     }
 
 
@@ -82,13 +82,13 @@ def _decide_next_step(state: HtmlCoderState) -> Literal["coder", "end"]:
 
 
 def _same_findings(
-        new_findings: list[AccessibilityFinding], 
-        old_findings: list[AccessibilityFinding],
+    new_findings: list[AccessibilityFinding],
+    old_findings: list[AccessibilityFinding],
 ) -> bool:
     if not new_findings or not old_findings:
         return False
 
     new_rule_ids = [finding.rule_id for finding in new_findings]
     old_rule_ids = [finding.rule_id for finding in old_findings]
-    
+
     return sorted(new_rule_ids) == sorted(old_rule_ids)
